@@ -4,18 +4,19 @@
 #page_content
   .container
     .main
+    
       .selected_projects.list
         .list_title
-          .title
-            h2= t('sections.selection.title')
+          .title 
+      = link_to explore_path(anchor: :recommended), target: ( defined?(embed_link) ? '__blank' : '' ) do
+        h2= t('sections.selection.title')
+      end
         .projects
           = render partial: 'project', locals: {project: @first_project, custom_class: 'first' } if @first_project
           = render partial: 'project', locals: {project: @second_project } if @second_project
           = render partial: 'project', locals: {project: @third_project, custom_class: 'last' } if @third_project
-        .explore_link
           hr
-          = link_to t('main.links.selected'), explore_path(anchor: :recommended)
-
+          
       .expiring_projects.list
         .list_title
           .title
@@ -53,10 +54,10 @@
                 = link_to post.url, target: '__blank', class: 'resume' do
                   = truncate(post.summary, length: 130).html_safe
 
-        .facebook
-          h3= t('sidebar.titles.facebook')
-          .fb-like data-href="#{Configuration['facebook_url']}" data-send="false" data-width="160" data-show-faces="true"
-        #twitter.twitter[data-username="@#{Configuration['twitter_username']}"]
+        .renren
+          h3= t('sidebar.titles.renren')
+          .fb-like data-href="#{Configuration['renren_url']}" data-send="false" data-width="160" data-show-faces="true"
+        #twitter.twitter[data-username="@#{Configuration['sinaweibo_username']}"]
         .newsletter
           h3= t('sidebar.titles.newsletter')
           = form_tag Configuration['mailchimp_url'], id: 'mailee-form', method: 'post' do
